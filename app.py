@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.preprocessing import LabelEncoder
 
 # Load dataset
 df = pd.read_excel("supply_chain_data.xlsx")
@@ -28,17 +27,18 @@ input_data = pd.DataFrame({
     "ShipmentMode":[shipment_mode],
     "Carrier":[carrier],
     "Weather":[weather],
-    "TrafficLevel":[traffic],
-    "DelayDays":[0]  # placeholder
+    "TrafficLevel":[traffic]
 })
 
-# Encode categorical variables same way as training
-#for col in ["Origin","Destination","ShipmentMode","Carrier","Weather","TrafficLevel"]:
- #   le = LabelEncoder()
-   # input_data[col] = le.fit(df[col]).transform(input_data[col])
+# One-hot encode categorical variables to match training
+input_encoded = pd.get_dummies(input_data)
+
+# Align with training columns
+train_features = pd.get_dummies(df.drop("DelayDays", axis=1))
+input_encoded = input_encoded.reindex(columns=train_features.columns, fill_value=0)
 
 # Prediction
-prediction = model.predict(input_data.drop("DelayDays", axis=1))[0]
+prediction = model.predict(input_encoded)[0]
 
 st.write("### Prediction Result:")
 st.success("Delayed" if prediction==1 else "On Time")
