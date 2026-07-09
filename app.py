@@ -33,9 +33,9 @@ input_data = pd.DataFrame({
 })
 
 # Encode categorical variables same way as training
-for col in ["Origin","Destination","ShipmentMode","Carrier","Weather","TrafficLevel"]:
-    le = LabelEncoder()
-    input_data[col] = le.fit(df[col]).transform(input_data[col])
+#for col in ["Origin","Destination","ShipmentMode","Carrier","Weather","TrafficLevel"]:
+ #   le = LabelEncoder()
+   # input_data[col] = le.fit(df[col]).transform(input_data[col])
 
 # Prediction
 prediction = model.predict(input_data.drop("DelayDays", axis=1))[0]
