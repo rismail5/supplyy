@@ -5,8 +5,13 @@ import pickle
 # Load dataset
 df = pd.read_excel("supply_chain_data.xlsx")
 
+# Convert date columns to numerical features (ordinal dates)
+df['OrderDate'] = df['OrderDate'].apply(lambda x: x.toordinal() if pd.notna(x) else 0)
+df['ScheduledDeliveryDate'] = df['ScheduledDeliveryDate'].apply(lambda x: x.toordinal() if pd.notna(x) else 0)
+df['ActualDeliveryDate'] = df['ActualDeliveryDate'].apply(lambda x: x.toordinal() if pd.notna(x) else 0)
+
 # Load trained model
-with open("delay_model2.pkl", "rb") as f:
+with open("delay_model3.pkl", "rb") as f:
     model = pickle.load(f)
 
 st.title("Supply Chain Delay Prediction Dashboard")
@@ -20,6 +25,10 @@ weather = st.selectbox("Select Weather", df["Weather"].unique())
 traffic = st.selectbox("Select Traffic Level", df["TrafficLevel"].unique())
 distance = st.slider("Distance (km)", int(df["Distance_km"].min()), int(df["Distance_km"].max()))
 
+order_date = st.date_input("Order Date")
+scheduled_date = st.date_input("Scheduled Delivery Date")
+actual_date = st.date_input("Actual Delivery Date")
+
 # Prepare input row
 input_data = pd.DataFrame({
     "Origin":[origin],
@@ -28,7 +37,10 @@ input_data = pd.DataFrame({
     "ShipmentMode":[shipment_mode],
     "Carrier":[carrier],
     "Weather":[weather],
-    "TrafficLevel":[traffic]
+    "TrafficLevel":[traffic],
+    "OrderDate":[order_date.toordinal()],
+    "ScheduledDeliveryDate":[scheduled_date.toordinal()],
+    "ActualDeliveryDate":[actual_date.toordinal()]
 })
 
 # One-hot encode categorical variables
