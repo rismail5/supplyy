@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
-import joblib
+import pickle
 
 # Load dataset
 df = pd.read_excel("supply_chain_data.xlsx")
 
 # Load trained model
-model = joblib.load("delay_model.pkl")
+with open("delay_model2.pkl", "rb") as f:
+    model = pickle.load(f)
 
 st.title("Supply Chain Delay Prediction Dashboard")
 
@@ -30,10 +31,10 @@ input_data = pd.DataFrame({
     "TrafficLevel":[traffic]
 })
 
-# One-hot encode categorical variables to match training
+# One-hot encode categorical variables
 input_encoded = pd.get_dummies(input_data)
 
-# Align with training columns
+# Align with training features
 train_features = pd.get_dummies(df.drop("DelayDays", axis=1))
 input_encoded = input_encoded.reindex(columns=train_features.columns, fill_value=0)
 
