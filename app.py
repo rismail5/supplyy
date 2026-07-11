@@ -51,8 +51,12 @@ input_df = pd.DataFrame([input_dict])
 
 # Predict
 if st.button("Predict Delay"):
-    prediction = model.predict(input_df)[0]
-    if prediction == 1:
-        st.error("⚠️ Predicted: Delivery will be delayed")
-    else:
-        st.success("✅ Predicted: Delivery will be on time")
+    try:
+        prediction = model.predict(input_df)[0]
+        if prediction == 1:
+            st.error("⚠️ Predicted: Delivery will be delayed")
+        else:
+            st.success("✅ Predicted: Delivery will be on time")
+    except Exception as e:
+        st.warning(f"Prediction failed: {e}")
+
