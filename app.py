@@ -1,9 +1,18 @@
-import streamlit as st
+import importlib
+
+libs = ["streamlit", "scikit-learn", "pandas", "numpy", "joblib"]
+
+print("🔎 Installed library versions:")
+for lib in libs:
+    try:
+        module = importlib.import_module(lib)
+        version = getattr(module, "__version__", "unknown")
+        print(f"{lib}: {version}")
+    except ImportError:
+        print(f"{lib}: not installed")
+This will show in your logs exactly what’s installed.import streamlit as st
 import pandas as pd
 import joblib
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning)
-
 
 # Load model
 model = joblib.load("delay_model9.pkl")
@@ -90,3 +99,5 @@ if st.button("Predict Delay"):
             st.success("✅ Predicted: Delivery will be on time")
     except Exception as e:
         st.warning(f"Prediction failed: {e}")
+
+
