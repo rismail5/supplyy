@@ -1,15 +1,4 @@
-import importlib, streamlit as st
 
-libs = ["streamlit", "scikit-learn", "pandas", "numpy", "joblib", "matplotlib", "seaborn"]
-
-st.sidebar.title("Environment Status")
-for lib in libs:
-    try:
-        module = importlib.import_module(lib)
-        version = getattr(module, "__version__", "unknown")
-        st.sidebar.write(f"{lib}: {version}")
-    except ImportError:
-        st.sidebar.write(f"{lib}: not installed")
 
 import pandas as pd
 import joblib
