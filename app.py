@@ -4,7 +4,7 @@ import joblib
 
 # Load model
 try:
-    model = joblib.load("delay_model10.pkl")
+    model = joblib.load("delay_model12.pkl")
 except Exception as e:
     st.error(f"Model failed to load: {e}")
 
