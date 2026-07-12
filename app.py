@@ -3,10 +3,8 @@ import pandas as pd
 import joblib
 
 # Load model
-try:
-    model = joblib.load("delay_model12.pkl")
-except Exception as e:
-    st.error(f"Model failed to load: {e}")
+model = joblib.load("delay_model12.pkl")
+
 
 
 st.title("📦 Delivery Delay Prediction")
