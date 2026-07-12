@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+
 
 # Load model
 model = joblib.load("delay_model9.pkl")
