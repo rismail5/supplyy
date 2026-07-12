@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load trained model
-model = joblib.load("delay_model9.pkl")
+# Load model
+model = joblib.load("delay_model2.pkl")
 
-st.title("🚚 Supply Chain Delay Prediction")
+st.title("📦 Delivery Delay Prediction")
 
-# User inputs
+# Inputs
 origin = st.selectbox("Origin", ["Delhi", "Mumbai", "Chennai", "Bangalore"])
-destination = st.selectbox("Destination", ["Delhi", "Mumbai", "Chennai", "Bangalore"])
+destination = st.selectbox("Destination", ["Ahmedabad", "Hyderabad", "Kolkata", "Pune"])
 shipment_mode = st.selectbox("Shipment Mode", ["Sea", "Road", "Air", "Rail"])
 carrier = st.selectbox("Carrier", ["BlueDart", "DHL", "FedEx", "Delhivery"])
 weather = st.selectbox("Weather", ["Stormy", "Rainy", "Sunny"])
@@ -41,10 +41,10 @@ input_dict = {
     "Origin_Mumbai": 1 if origin=="Mumbai" else 0,
     "Origin_Chennai": 1 if origin=="Chennai" else 0,
     "Origin_Bangalore": 1 if origin=="Bangalore" else 0,
-    "Destination_Delhi": 1 if destination=="Delhi" else 0,
-    "Destination_Mumbai": 1 if destination=="Mumbai" else 0,
-    "Destination_Chennai": 1 if destination=="Chennai" else 0,
-    "Destination_Bangalore": 1 if destination=="Bangalore" else 0,
+    "Destination_Ahmedabad": 1 if destination=="Ahmedabad" else 0,
+    "Destination_Hyderabad": 1 if destination=="Hyderabad" else 0,
+    "Destination_Kolkata": 1 if destination=="Kolkata" else 0,
+    "Destination_Pune": 1 if destination=="Pune" else 0,
 }
 
 input_df = pd.DataFrame([input_dict])
