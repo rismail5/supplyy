@@ -1,6 +1,6 @@
 import importlib
 
-libs = ["streamlit", "scikit-learn", "pandas", "numpy", "joblib"]
+libs = ["streamlit", "scikit-learn", "pandas", "numpy", "joblib", "matplotlib", "seaborn"]
 
 print("🔎 Installed library versions:")
 for lib in libs:
@@ -10,7 +10,6 @@ for lib in libs:
         print(f"{lib}: {version}")
     except ImportError:
         print(f"{lib}: not installed")
-This will show in your logs exactly what’s installed.import streamlit as st
 import pandas as pd
 import joblib
 
