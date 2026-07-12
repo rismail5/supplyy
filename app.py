@@ -4,7 +4,7 @@ import pandas as pd
 import joblib
 
 # Load model
-model = joblib.load("delay_model9.pkl")
+model = joblib.load("delay_model10.pkl")
 
 st.title("📦 Delivery Delay Prediction")
 
